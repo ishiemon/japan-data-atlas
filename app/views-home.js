@@ -1,7 +1,8 @@
-// The home page: Japan at a glance. The headline indicators up top,
-// the century of census counts as a chart a visitor can re-draw as bars,
-// the age structure of the 2020 census, the largest prefectures, and
-// the doors into the four topic sections.
+// The home page: Japan at a glance. A compact banner, the headline
+// indicators as one strip, then the century of census counts beside
+// the age structure — chart, toggle and sources all in the first
+// screen — then the largest prefectures, the turning points, and the
+// doors into the four topic sections.
 
 import { ageGroups, ageGroupsSource, censusTrend, censusTrendSource, headlineIndicators, populationMilestones } from './data-overview.js';
 import { largestPrefectures, prefectureCensusTotal, prefecturesSource } from './data-prefectures.js';
@@ -13,26 +14,26 @@ export const homeTopics = [
   {
     href: '#/population',
     kicker: 'Population',
-    title: 'A country of 123.8 million, and shrinking',
-    text: 'Census counts since 1920, the age structure, and the prefectures where people actually live.',
+    title: 'The people, counted since 1920',
+    text: 'Census counts across a century, the age structure, a tile map and a searchable table of all 47 prefectures.',
   },
   {
     href: '#/economy',
     kicker: 'Economy & work',
     title: 'Prices woke up; work never slept',
-    text: 'Inflation after two quiet decades, a 2.5% unemployment rate and what households spend.',
+    text: 'Inflation after two quiet decades, a tight jobs market and what households spend each month.',
   },
   {
     href: '#/society',
     kicker: 'People & society',
     title: 'Fewer births, longer lives',
-    text: '727,277 births in 2023, a fertility rate of 1.20, and life expectancy among the world’s highest.',
+    text: 'Births and deaths from the vital register, the fertility rate, and life expectancy among the world’s highest.',
   },
   {
     href: '#/land',
     kicker: 'Land & regions',
-    title: '14,125 islands, two-thirds forest',
-    text: 'The land itself: area, density, the great Hokkaido share and the crowded Kantō plain.',
+    title: 'Islands, forests and crowded plains',
+    text: 'The land itself: area, islands, forest cover and the density gap between Hokkaido and Tokyo.',
   },
 ];
 
@@ -41,14 +42,16 @@ function trendChart(mode) {
   if (mode === 'bars') {
     return barChart(
       censusTrend.map((d) => ({ label: String(d.year), value: d.millions })),
-      { colour: '#1f4e79', format: (v) => `${v.toFixed(1)}` },
+      { colour: '#1f4e79', height: 140, format: (v) => `${v.toFixed(1)}`, title: 'Population at each census, 1920-2020 (millions)' },
     );
   }
   return lineChart(points, {
     colour: '#1f4e79',
+    height: 140,
     yMin: 40,
     yMax: 140,
     formatY: (v) => `${Math.round(v)}m`,
+    title: 'Population at each census, 1920-2020 (millions)',
   });
 }
 
@@ -60,8 +63,8 @@ function agePanel() {
     .join('');
   return `<section class="panel">
   <h2>Who the country is: the 2020 age structure</h2>
-  <p>Three broad age groups of the 126,146,099 people the census counted. The working-age group shrinks every census while the oldest group grows.</p>
-  ${shareBar(ageGroups, {})}
+  <p>The three broad age groups of the 126,146,099 people counted in 2020.</p>
+  ${shareBar(ageGroups, { title: 'Age structure of the 2020 census' })}
   <ul class="legend">${legend}</ul>
   ${sourceLine(ageGroupsSource)}
 </section>`;
@@ -69,14 +72,13 @@ function agePanel() {
 
 function prefecturePanel() {
   const rows = largestPrefectures
-    .slice(0, 5)
     .map(
       (p, i) => `<tr><td>${i + 1}</td><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.region)}</td><td class="num">${withCommas(p.population)}</td><td class="num">${sharePercent(p.population, prefectureCensusTotal)}</td></tr>`,
     )
     .join('');
   return `<section class="panel">
   <h2>Where people live: the five largest prefectures</h2>
-  <p>Tokyo alone holds 11.1% of the country. The full table, with the smallest prefectures and a search box, is on the Population page.</p>
+  <p>Tokyo alone holds 11.1% of the country. The full table of all 47, with a tile map, search and sorting, is on the Population page.</p>
   <table>
     <thead><tr><th>#</th><th>Prefecture</th><th>Region</th><th class="num">Population</th><th class="num">Share</th></tr></thead>
     <tbody>${rows}</tbody>
@@ -93,6 +95,7 @@ function milestonesPanel() {
   return `<section class="panel">
   <h2>Turning points</h2>
   <ul class="milestones">${items}</ul>
+  ${sourceLine('Statistics Bureau, Population Estimates and Population Census', '2008-2024')}
 </section>`;
 }
 
@@ -103,12 +106,13 @@ export function homeView(mode) {
   return `<section class="hero">
   <p class="kicker">National statistics of Japan</p>
   <h1>Japan in numbers</h1>
-  <p class="intro">The official figures for the country — its people, prices, work and land — gathered from the offices that publish them, with the source and year on every number. No trackers, no network calls: everything on this page ships in its own files.</p>
+  <p class="intro">Japan's official figures: people, prices, work and land.</p>
 </section>
 ${indicatorGrid(headlineIndicators)}
+<div class="duo">
 <section class="panel">
   <h2>A century of censuses</h2>
-  <p>Japan counted 56.0 million people at its first modern census in 1920, more than doubled that by 1990, peaked around 2010 and has fallen since. Draw it as a line or as bars:</p>
+  <p>Censuses since 1920: 56.0 million first, a peak around 2010, falling since.</p>
   <p class="toggle" role="group" aria-label="Chart style">
     <button type="button" data-chart-mode="line"${pressed('line')}>Line</button>
     <button type="button" data-chart-mode="bars"${pressed('bars')}>Bars</button>
@@ -117,6 +121,7 @@ ${indicatorGrid(headlineIndicators)}
   ${sourceLine(censusTrendSource)}
 </section>
 ${agePanel()}
+</div>
 ${prefecturePanel()}
 ${milestonesPanel()}
 <h2 class="section-title">Explore the sections</h2>

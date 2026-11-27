@@ -6,42 +6,42 @@ export const headlineIndicators = [
   {
     label: 'Population',
     value: '123.80 million',
-    detail: 'Total population on 1 October 2024, down 898,000 in a year',
+    detail: 'On 1 October 2024, down 898,000 in a year',
     source: 'Statistics Bureau, Population Estimates',
     year: 2024,
   },
   {
     label: 'Aged 65 and over',
     value: '29.3%',
-    detail: '36.25 million people — the highest share of any large country',
+    detail: '36.25 million people — a world-highest share',
     source: 'Statistics Bureau, Population Estimates',
     year: 2024,
   },
   {
     label: 'Households',
     value: '55.7 million',
-    detail: 'Average household size has fallen to about 2.2 people',
+    detail: 'About 2.2 people per household on average',
     source: 'Statistics Bureau, Population Census',
     year: 2020,
   },
   {
     label: 'Land area',
     value: '377,976 km²',
-    detail: '14,125 islands; about two-thirds of the land is forest',
+    detail: '14,125 islands; two-thirds of it is forest',
     source: 'Geospatial Information Authority of Japan',
     year: 2023,
   },
   {
     label: 'Life expectancy',
     value: '81.1 / 87.1 years',
-    detail: 'At birth, men / women — among the longest lives in the world',
+    detail: 'Men / women, among the world’s longest lives',
     source: 'Ministry of Health, Labour and Welfare, Abridged Life Tables',
     year: 2023,
   },
   {
     label: 'Births',
     value: '727,277',
-    detail: 'Against 1,575,936 deaths: a natural fall of 848,659 in one year',
+    detail: 'Against 1,575,936 deaths — a natural fall of 848,659',
     source: 'Ministry of Health, Labour and Welfare, Vital Statistics',
     year: 2023,
   },
@@ -75,6 +75,23 @@ export const ageGroups = [
 ];
 
 export const ageGroupsSource = 'Statistics Bureau, Population Census 2020';
+
+// The same three age groups as a share of the whole population at each
+// census since 1950, percent. The pyramid has flipped: in 1950 one
+// person in three was a child and one in twenty was 65 or over; by 2020
+// the old outnumber the young by more than two to one.
+export const ageShareHistory = [
+  { year: 1950, young: 35.4, working: 59.6, old: 4.9 },
+  { year: 1960, young: 30.2, working: 64.1, old: 5.7 },
+  { year: 1970, young: 24.0, working: 68.9, old: 7.1 },
+  { year: 1980, young: 23.5, working: 67.4, old: 9.1 },
+  { year: 1990, young: 18.2, working: 69.7, old: 12.1 },
+  { year: 2000, young: 14.6, working: 68.1, old: 17.4 },
+  { year: 2010, young: 13.2, working: 63.8, old: 23.0 },
+  { year: 2020, young: 11.9, working: 59.5, old: 28.6 },
+];
+
+export const ageShareHistorySource = 'Statistics Bureau, Population Census 1950-2020';
 
 // Turning points a visitor usually asks about first.
 export const populationMilestones = [

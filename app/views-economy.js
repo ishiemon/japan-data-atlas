@@ -44,6 +44,7 @@ export function economyView(dataset) {
     yMin: s.yMin,
     yMax: s.yMax,
     formatY: s.formatY,
+    title: s.title,
   });
   const notes = economyNotes.map((n) => `<li>${escapeHtml(n)}</li>`).join('');
   return `${pageHead('Economy & work', 'Prices, jobs and household spending', 'Two quiet decades of prices ended in 2022. Work, though, never loosened: unemployment stayed under 3% and employment reached a record. The figures below are the annual averages the official releases lead with.')}
@@ -61,5 +62,6 @@ ${indicatorGrid(economyIndicators)}
 <section class="panel">
   <h2>The story in short</h2>
   <ul class="milestones">${notes}</ul>
+  ${sourceLine('Statistics Bureau, Consumer Price Index and Labour Force Survey; Ministry of Health, Labour and Welfare (minimum wage)', '1999-2024')}
 </section>`;
 }

@@ -12,6 +12,9 @@ export function pageHead(kicker, title, intro) {
 }
 
 // indicators: [{label, value, detail, source, year}]
+// The grid takes a modifier for the count, so a row of four cards
+// fills its row exactly instead of leaving an orphan gap, and a row
+// of six becomes one compact strip.
 export function indicatorGrid(indicators) {
   const cards = indicators
     .map(
@@ -23,7 +26,8 @@ export function indicatorGrid(indicators) {
 </article>`,
     )
     .join('');
-  return `<section class="stat-grid">${cards}</section>`;
+  const modifier = indicators.length === 4 ? ' stat-grid-4' : indicators.length === 6 ? ' stat-grid-6' : '';
+  return `<section class="stat-grid${modifier}">${cards}</section>`;
 }
 
 // A titled panel holding one chart (an SVG string) and its source line.

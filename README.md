@@ -9,12 +9,12 @@ runs offline in a web browser, on a desktop and on a phone, from its own
 static files. Five sections — Overview, Population, Economy & work,
 People & society, and Land & regions — present the official figures a
 visitor exploring the country needs: census counts since 1920, the age
-structure, a searchable prefecture table, consumer prices and
-unemployment the reader can switch between, births against deaths,
-fertility, life expectancy, land and islands. Every figure names the
-office that published it and the year it describes. Charts are drawn in
-code as SVG; there are no image, font or library files and no network
-requests.
+structure and how it flipped since 1950, a tile map and a searchable
+table of all 47 prefectures, consumer prices and unemployment the reader
+can switch between, births against deaths, fertility, life expectancy,
+land and islands. Every figure names the office that published it and
+the year it describes. Charts are drawn in code as SVG; there are no
+image, font or library files and no network requests.
 
 ## Run it
 
@@ -41,11 +41,11 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
   - `app/index.html` — the shell: header, navigation and footer
   - `app/main.js` — the hash router and the wiring for every control
   - `app/style.css` — the whole design: paper, ink navy and vermilion
-  - `app/data-overview.js` — headline indicators, census trend, age groups
-  - `app/data-prefectures.js` — prefecture populations and land facts
+  - `app/data-overview.js` — headline indicators, census trend, age groups and their history
+  - `app/data-prefectures.js` — all 47 prefectures (population, area, tile position) and land facts
   - `app/data-economy.js` — prices, unemployment, household spending
   - `app/data-society.js` — births, deaths, fertility, life expectancy
-  - `app/charts.js` — the SVG chart builders (line, bars, mirrored, share)
+  - `app/charts.js` — the SVG chart builders (line, bars, mirrored, share, stacked share, tile map)
   - `app/format.js` — number formats, escaping and source lines
   - `app/views-shared.js` — page headings, indicator grids, chart cards
   - `app/views-home.js`, `app/views-population.js`, `app/views-economy.js`,

@@ -20,16 +20,25 @@ export function societyView(show) {
     };
   });
   const pressed = (k) => (show === k ? ' aria-pressed="true"' : ' aria-pressed="false"');
-  const mirrored = mirroredBars(rows, { format: (v) => (v === 0 ? '' : withCommas(v)) });
+  const mirrored = mirroredBars(rows, {
+    format: (v) => (v === 0 ? '' : withCommas(v)),
+    leftLabel: 'Births',
+    rightLabel: 'Deaths',
+    title: 'Births against deaths, 2016-2023',
+  });
   const fertility = barChart(
     fertilityTrend.map((d) => ({ label: String(d.year), value: d.rate })),
-    { colour: '#8e44ad', format: (v) => v.toFixed(2) },
+    {
+      colour: '#8e44ad',
+      format: (v) => v.toFixed(2),
+      refLine: { value: 2.07, label: 'Replacement level 2.07' },
+      title: 'Total fertility rate, 2015-2023',
+    },
   );
   const lifeRows = lifeExpectancyTrend
     .map((d) => `<tr><td>${d.year}</td><td class="num">${d.men.toFixed(2)}</td><td class="num">${d.women.toFixed(2)}</td></tr>`)
     .join('');
-  return `${pageHead('People & society', 'Births, deaths and long lives', 'Japan records every birth and death. The register shows a country where deaths have outnumbered births since 2007, where the fertility rate has fallen to 1.20, and where people nonetheless live longer than almost anywhere else.')}
-${indicatorGrid(societyIndicators)}
+  return `${pageHead('People & society', 'Births, deaths and long lives', 'Japan records every birth and death: deaths have outnumbered births since 2007, fertility has fallen to 1.20, and lives are among the longest anywhere.')}
 <section class="panel">
   <h2>Births (left, green) against deaths (right, red)</h2>
   <p>Births fell below one million in 2016 and have fallen every year since. Deaths climbed past 1.5 million in 2022. Show both series, or one at a time:</p>
@@ -41,6 +50,7 @@ ${indicatorGrid(societyIndicators)}
   ${mirrored}
   ${sourceLine(vitalSource, '2016-2023')}
 </section>
+${indicatorGrid(societyIndicators)}
 ${chartCard('Total fertility rate', 'The average number of children a woman bears over her life. Replacement level is about 2.07; Japan has been below it since 1975, and the 2023 figure of 1.20 is the lowest on record.', fertility, fertilitySource)}
 <section class="panel">
   <h2>Life expectancy at birth (years)</h2>

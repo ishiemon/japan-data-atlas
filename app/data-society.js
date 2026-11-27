@@ -30,8 +30,12 @@ export const deathsTrend = [
 export const vitalSource = 'Ministry of Health, Labour and Welfare, Vital Statistics';
 
 // Total fertility rate — the average number of children a woman bears.
+// Every year 2015-2023, so the bars stand for equal steps in time.
 export const fertilityTrend = [
   { year: 2015, rate: 1.45 },
+  { year: 2016, rate: 1.44 },
+  { year: 2017, rate: 1.43 },
+  { year: 2018, rate: 1.42 },
   { year: 2019, rate: 1.36 },
   { year: 2020, rate: 1.33 },
   { year: 2021, rate: 1.3 },
@@ -39,7 +43,7 @@ export const fertilityTrend = [
   { year: 2023, rate: 1.2 },
 ];
 
-export const fertilitySource = 'Ministry of Health, Labour and Welfare, Vital Statistics 2023';
+export const fertilitySource = 'Ministry of Health, Labour and Welfare, Vital Statistics 2015-2023';
 
 // Life expectancy at birth, years, men and women.
 export const lifeExpectancyTrend = [

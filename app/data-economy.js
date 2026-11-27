@@ -51,10 +51,10 @@ export const economyIndicators = [
   },
   {
     label: 'Price rise',
-    value: '+3.2% in 2023',
-    detail: 'The fastest consumer price rise since 1982, easing to +2.7% in 2024',
+    value: '+2.7% in 2024',
+    detail: 'Easing from +3.2% in 2023, the fastest consumer price rise since 1982',
     source: 'Statistics Bureau, Consumer Price Index',
-    year: 2023,
+    year: 2024,
   },
 ];
 

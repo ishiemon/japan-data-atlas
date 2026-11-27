@@ -96,20 +96,22 @@ main {
 .hero {
   background: linear-gradient(135deg, var(--navy-dark), var(--navy) 62%, #2e6ea6);
   color: #fff;
-  border-radius: 0 0 var(--radius) var(--radius);
-  padding: 40px 36px 34px;
-  margin: 0 -20px 26px;
+  border-radius: var(--radius);
+  padding: 18px 26px 15px;
+  margin: 0 0 12px;
 }
 
 .hero h1 {
   color: #fff;
-  font-size: 44px;
-  margin: 4px 0 10px;
+  font-size: 31px;
+  margin: 2px 0 6px;
 }
 
 .hero .intro {
   color: #dbe7f3;
-  max-width: 46em;
+  font-size: 16px;
+  max-width: 62em;
+  margin: 0;
 }
 
 .hero .kicker {
@@ -122,32 +124,34 @@ main {
   font-size: 12.5px;
   font-weight: 700;
   color: var(--accent);
-  margin: 22px 0 0;
+  margin: 10px 0 0;
 }
 
 h1 {
-  font-size: 34px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
   line-height: 1.2;
-  margin: 6px 0 10px;
+  margin: 4px 0 8px;
   color: var(--navy-dark);
 }
 
 h2 {
-  font-size: 22px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
   line-height: 1.3;
   margin: 0 0 8px;
   color: var(--navy-dark);
 }
 
 .section-title {
-  margin: 30px 0 12px;
+  margin: 26px 0 12px;
 }
 
 .intro {
-  font-size: 18.5px;
+  font-size: 17px;
   color: var(--muted);
   max-width: 44em;
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
 a {
@@ -169,8 +173,8 @@ a {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 24px 26px;
-  margin: 22px 0;
+  padding: 20px 22px;
+  margin: 18px 0;
   box-shadow: 0 1px 3px rgba(28, 39, 51, 0.05);
 }
 
@@ -178,11 +182,63 @@ a {
   max-width: 46em;
 }
 
+/* Two panels side by side (chart beside map, chart beside summary) */
+.duo {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.duo-pop {
+  grid-template-columns: 1fr 1fr;
+}
+
+.duo .panel {
+  margin: 0;
+}
+
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin: 22px 0;
+  margin: 18px 0;
+}
+
+/* Four cards fill their row exactly — no orphan gap */
+.stat-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-grid-4 .stat-card {
+  padding: 13px 15px 10px;
+}
+
+.stat-grid-4 .stat-value {
+  font-size: 23px;
+}
+
+/* Six headline cards as one compact strip */
+.stat-grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+
+.stat-grid-6 .stat-card {
+  padding: 11px 12px 9px;
+}
+
+.stat-grid-6 .stat-value {
+  font-size: 19px;
+}
+
+.stat-grid-6 .stat-detail {
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.stat-grid-6 .stat-source {
+  font-size: 11px;
 }
 
 .stat-card {
@@ -204,10 +260,12 @@ a {
 
 .stat-value {
   margin: 4px 0 6px;
-  font-size: 27px;
+  font-size: 26px;
   font-weight: 750;
   line-height: 1.15;
   color: var(--navy-dark);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .stat-detail {
@@ -252,6 +310,7 @@ a {
 }
 
 .topic-card h3 {
+  font-family: Georgia, "Times New Roman", serif;
   margin: 4px 0 6px;
   font-size: 19px;
   color: var(--navy-dark);
@@ -282,15 +341,64 @@ a {
   stroke-width: 1;
 }
 
+.chart .zero {
+  stroke: #98a4ae;
+  stroke-width: 1.2;
+  stroke-dasharray: 5 4;
+}
+
 .chart .tick {
   fill: var(--muted);
-  font-size: 12.5px;
+  font-size: 13px;
 }
 
 .chart .point-label {
   fill: var(--ink);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 650;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+.chart .seg-label {
+  fill: #fff;
+  font-size: 12.5px;
+  font-weight: 650;
+}
+
+/* Prefecture tile map */
+
+.tile {
+  cursor: pointer;
+}
+
+.tile text {
+  fill: #fff;
+  font-weight: 600;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.tile-dark text {
+  fill: var(--ink);
+}
+
+.tile:hover rect,
+.tile:focus rect {
+  stroke: var(--navy-dark);
+  stroke-width: 2;
+}
+
+.tile-selected rect {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+
+.tile-detail {
+  font-weight: 600;
+  color: var(--navy-dark);
+  margin: 8px 0 0;
 }
 
 .legend {
@@ -426,6 +534,22 @@ tbody tr:hover {
   margin: 4px 0;
 }
 
+/* Mid widths: the six-card strip relaxes to two rows of three */
+
+@media (max-width: 980px) {
+  .stat-grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stat-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .duo {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Phone layout */
 
 @media (max-width: 700px) {
@@ -434,16 +558,22 @@ tbody tr:hover {
   }
 
   .site-head {
-    padding: 14px 16px 10px;
+    padding: 10px 14px 6px;
+    gap: 6px 14px;
+  }
+
+  .brand {
+    font-size: 18px;
   }
 
   .site-head nav {
     margin-left: 0;
+    gap: 2px 4px;
   }
 
   .site-head nav a {
-    padding: 5px 9px;
-    font-size: 14.5px;
+    padding: 4px 8px;
+    font-size: 13.5px;
   }
 
   main {
@@ -451,19 +581,61 @@ tbody tr:hover {
   }
 
   .hero {
-    margin: 0 -14px 20px;
-    padding: 28px 20px 24px;
+    margin: 0 0 12px;
+    padding: 10px 14px 8px;
   }
 
   .hero h1 {
-    font-size: 33px;
+    font-size: 23px;
+    margin: 1px 0 3px;
+  }
+
+  .hero .intro {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .hero .kicker {
+    font-size: 11px;
   }
 
   h1 {
-    font-size: 27px;
+    font-size: 25px;
   }
 
-  .stat-grid {
+  /* Two KPI cards to a row, so the first chart reaches the screen */
+  .stat-grid,
+  .stat-grid-4,
+  .stat-grid-6 {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-grid-6 .stat-card {
+    padding: 8px 10px 7px;
+  }
+
+  .stat-grid-6 .stat-label {
+    font-size: 10.5px;
+  }
+
+  .stat-grid-6 .stat-value {
+    font-size: 16px;
+    margin: 2px 0 3px;
+  }
+
+  .stat-grid-6 .stat-detail {
+    font-size: 11.5px;
+    line-height: 1.3;
+    margin: 0 0 4px;
+  }
+
+  .stat-grid-6 .stat-source {
+    font-size: 9.5px;
+    line-height: 1.3;
+  }
+
+  .duo {
     grid-template-columns: 1fr;
   }
 
@@ -472,11 +644,11 @@ tbody tr:hover {
   }
 
   .panel {
-    padding: 18px 16px;
+    padding: 14px;
   }
 
   .stat-value {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   table {
